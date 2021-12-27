@@ -23,9 +23,9 @@ Route::prefix('auth')->group(function () {
     //api/auth/register
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
-    Route::get('/user', AuthController::class, 'user');
+    
     Route::group(['middleware' => ['auth:sanctum']], function () {
-        
+        Route::get('/user', [AuthController::class, 'user']);
         Route::post('/logout', [AuthController::class, 'logout']);
     });
     Route::get('/authentication-failed', [AuthController::class, 'authFailer'])->name('auth-failed');
